@@ -23,7 +23,7 @@ Feature: textFiles
     And the user opens file "New text file.txt" using the webUI
     Then line 1 of the text should be "other text before stuff"
 
-  @issue-36233
+  @issue-core-36233
   Scenario: Delete and restore hidden text file
     Given the user has created a text file with the name "abc.txt"
     And the user has input "This is a hidden file" in the text area
@@ -35,5 +35,7 @@ Feature: textFiles
     When the user restores file ".abc.txt" from the trashbin using the webUI
     And the user browses to the files page
     Then file ".abc.txt" should be listed on the webUI
-    When the user opens file ".abc.txt" using the webUI
+    When user "user1" downloads file "/.abc.txt" using the WebDAV API
+    Then the downloaded content should be "This is a hidden file"
+#    When the user opens file ".abc.txt" using the webUI
 #    Then line 1 of the text should be "This is a hidden file"
